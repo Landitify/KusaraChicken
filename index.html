@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pesan Ayam</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff5ec;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar form */
+    .sidebar {
+      width: 320px;
+      background-color: rgba(18, 153, 144, 0.08);
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #f57c00;
+      color: white;
+      font-weight: bold;
+      border: none;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ef6c00;
+    }
+
+    #statusMsg {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-content: flex-start;
+      justify-content: center;
+    }
+
+    .produk {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+    }
+
+    .produk img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    @media(max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+    }
+
+    .menu-row {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .menu-row .row-top {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .menu-row .row-top select,
+    .menu-row .row-top input {
+      flex: 1 1 45%;
+      min-width: 130px;
+    }
+
+    .menu-row .row-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .menu-row .row-bottom input {
+      flex: 1 1 60%;
+      min-width: 120px;
+    }
+
+    .remove-btn {
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      flex: 1 1 35%;
+      min-width: 80px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Form Pesanan Ayam</h2>
+    <form id="orderForm">
+      <input type="text" id="nama" placeholder="Nama Lengkap" required />
+      <div id="menuContainer"></div>
+      <button type="button" id="addMenu">+ Tambah Menu</button>
+      <button type="submit">Buat Pesanan</button>
+    </form>
+    <p id="statusMsg"></p>
+  </div>
+
+  <div class="main-content">
+    <!-- Contoh produk -->
+    <div class="produk">
+      <img src="https://source.unsplash.com/200x150/?chicken,grilled" alt="Wing Drummete (marinasi)">
+      <h4>Wing Drummete (marinasi)</h4>
+      <p>Rp 30.000</p>
+    </div>
+    <div class="produk">
+      <img src="https://source.unsplash.com/200x150/?chicken,fried" alt="Parting Premium (marinasi)">
+      <h4>Parting Premium (marinasi)</h4>
+      <p>Rp 29.000</p>
+    </div>
+    <div class="produk">
+      <img src="https://source.unsplash.com/200x150/?chicken,spicy" alt="Paha Atas">
+      <h4>Paha Atas</h4>
+      <p>Rp 43.000</p>
+    </div>
+    <div class="produk">
+      <img src="https://source.unsplash.com/200x150/?chicken,roasted" alt="Paha Bawah">
+      <h4>Paha Bawah</h4>
+      <p>Rp 43.000</p>
+    </div>
+    <div class="produk">
+      <img src="https://source.unsplash.com/200x150/?chicken,whole" alt="Paha Utuh">
+      <h4>Paha Utuh</h4>
+      <p>Rp 43.000</p>
+    </div>
+    <div class="produk">  
+      <img src="https://source.unsplash.com/200x150/?chicken,boneless" alt="Paha (Tanpa Tulang & Tanpa Kulit)">
+      <h4>Paha (Tanpa Tulang & Tanpa Kulit)</h4>
+      <p>Rp 51.000</p>
+    </div>
+    <div class="produk">  
+      <img src="https://source.unsplash.com/200x150/?chicken,skinless" alt="Paha + Kulit (Tanpa Tulang)">
+      <h4>Paha + Kulit (Tanpa Tulang)</h4>
+      <p>Rp 50.000</p>
+    </div>
+    <div class="produk">    
+      <img src="https://source.unsplash.com/200x150/?chicken,breast" alt="Dada (Tanpa Tulang & Tanpa Kulit)">
+      <h4>Dada (Tanpa Tulang & Tanpa Kulit)</h4>
+      <p>Rp 49.000</p>
+    </div>
+    <div class="produk">  
+      <img src="https://source.unsplash.com/200x150/?chicken,fillet" alt="Dada (Tanpa Tulang & Tanpa Kulit)">
+      <h4>Dada (Tanpa Tulang & Tanpa Kulit)</h4>
+      <p>Rp 48.000</p>
+    </div>
+    <div class="produk">  
+      <img src="https://source.unsplash.com/200x150/?chicken,fillet" alt="Fillet (campuran)">
+      <h4>Fillet (campuran)</h4>
+      <p>Rp 47.000</p>
+    </div>
+    <div class="produk">  
+      <img src="https://source.unsplash.com/200x150/?chicken,wing" alt="Sayap Utuh">
+      <h4>Sayap Utuh</h4>
+      <p>Rp 35.000</p>
+    </div>
+    <div class="produk">  
+      <img src="https://source.unsplash.com/200x150/?chicken,wingstick" alt="Wingstick">
+      <h4>Wingstick</h4>
+      <p>Rp 37.000</p>
+    </div>
+    <div class="produk">  
+      <img src="https://source.unsplash.com/200x150/?chicken,middlewing" alt="Middle Wing">
+      <h4>Middle Wing</h4>
+      <p>Rp 37.000</p>
+    </div>
+    <div class="produk">  
+      <img src="https://source.unsplash.com/200x150/?chicken,trimming" alt="Trimming Paha (potongan mie ayam)">
+      <h4>Trimming Paha (potongan mie ayam)</h4>
+      <p>Rp 47.000</p>
+    </div>
+    <div class="produk">  
+      <img src="https://source.unsplash.com/200x150/?chicken,trimming" alt="Trimming Dada (ptongan mie ayam)">
+      <h4>Trimming Dada (ptongan mie ayam)</h4>
+      <p>Rp 47.000</p>
+    </div>
+    <div class="produk">  
+      <img src="https://source.unsplash.com/200x150/?chicken,skin" alt="Kulit">
+      <h4>Kulit</h4>
+      <p>Rp 36.000</p>
+    </div>
+    <!-- Tambah lagi produk di sini -->
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAjuzb9SHhgU5ahs_Zx4YUOQus7bJyg-tA",
+      authDomain: "pesanan-ayam-kusara-chicken.firebaseapp.com",
+      databaseURL: "https://pesanan-ayam-kusara-chicken-default-rtdb.firebaseio.com",
+      projectId: "pesanan-ayam-kusara-chicken",
+      storageBucket: "pesanan-ayam-kusara-chicken.firebasestorage.app",
+      messagingSenderId: "270019898754",
+      appId: "1:270019898754:web:6b7a33f69d504f626d739b",
+      measurementId: "G-RTGMZR7EFE"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const hargaMenu = {
+      "Wing Drummete (marinasi)": 30000,
+      "Parting Premium (marinasi)": 29000,
+      "Paha Atas": 43000,
+      "Paha Bawah": 43000,
+      "Paha Utuh": 43000,
+      "Paha (Tanpa Tulang & Tanpa Kulit)": 51000,
+      "Paha + Kulit (Tanpa Tulang)": 50000,
+      "Dada (Tanpa Tulang & Tanpa Kulit)": 49000,
+      "Fillet (campuran)": 47000,
+      "Sayap Utuh": 35000,
+      "Wingstick": 37000,
+      "Middle Wing": 37000,
+      "Trimming Paha (potongan mie ayam)": 47000,
+      "Trimming Dada (ptongan mie ayam)": 47000,
+      "Kulit": 36000
+    };
+
+    const form = document.getElementById("orderForm");
+    const menuContainer = document.getElementById("menuContainer");
+    const addMenuBtn = document.getElementById("addMenu");
+    const statusMsg = document.getElementById("statusMsg");
+
+    function createMenuRow() {
+      const row = document.createElement("div");
+      row.className = "menu-row";
+
+      const rowTop = document.createElement("div");
+      rowTop.className = "row-top";
+
+      const select = document.createElement("select");
+      select.required = true;
+      select.innerHTML = `<option value="">-- Pilih Pesanan --</option>` +
+        Object.keys(hargaMenu).map(menu => `<option value="${menu}">${menu}</option>`).join('');
+
+      const qty = document.createElement("input");
+      qty.type = "number";
+      qty.placeholder = "Jumlah";
+      qty.min = 1;
+      qty.required = true;
+
+      rowTop.append(select, qty);
+
+      const rowBottom = document.createElement("div");
+      rowBottom.className = "row-bottom";
+
+      const total = document.createElement("input");
+      total.type = "text";
+      total.placeholder = "Total Harga";
+      total.readOnly = true;
+
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.textContent = "Hapus";
+      removeBtn.className = "remove-btn";
+      removeBtn.onclick = () => row.remove();
+
+      rowBottom.append(total, removeBtn);
+
+      function updateTotal() {
+        const val = select.value;
+        const jumlah = parseInt(qty.value);
+        total.value = (val && jumlah && hargaMenu[val]) ? `Rp ${hargaMenu[val] * jumlah}` : '';
+      }
+
+      select.addEventListener("change", updateTotal);
+      qty.addEventListener("input", updateTotal);
+
+      row.append(rowTop, rowBottom);
+      return row;
+    }
+
+    addMenuBtn.addEventListener("click", () => {
+      const row = createMenuRow();
+      menuContainer.appendChild(row);
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nama = document.getElementById("nama").value.trim();
+      const pesanan = [];
+      let isValid = true;
+
+      menuContainer.querySelectorAll(".menu-row").forEach(row => {
+        const menu = row.querySelector("select").value;
+        const qty = parseInt(row.querySelector("input[type='number']").value);
+        if (!menu || !qty) isValid = false;
+        else pesanan.push({ menu, qty, total: hargaMenu[menu] * qty });
+      });
+
+      if (!nama || !isValid || pesanan.length === 0) {
+        statusMsg.textContent = "❌ Harap isi semua field!";
+        statusMsg.style.color = "red";
+        return;
+      }
+
+      try {
+        const newOrderRef = push(ref(db, 'pesanan'));
+        await set(newOrderRef, {
+          nama,
+          pesanan,
+          waktu: new Date().toISOString()
+        });
+
+        statusMsg.textContent = "✅ Pesanan berhasil dikirim!";
+        statusMsg.style.color = "green";
+        form.reset();
+        menuContainer.innerHTML = "";
+      } catch (error) {
+        statusMsg.textContent = "❌ Gagal mengirim pesanan: " + error.message;
+        statusMsg.style.color = "red";
+      }
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      addMenuBtn.click();
+    });
+  </script>
+</body>
+</html>
