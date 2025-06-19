@@ -130,6 +130,9 @@
         height: auto;
         position: relative;
       }
+      .produk{
+        width: calc(50% - 20px);
+      }
     }
 
     .menu-row {
@@ -195,6 +198,13 @@
       <button type="submit">Buat Pesanan</button>
     </form>
     <p id="statusMsg"></p>
+    <div id="pesananResume" style="margin-top: 20px; padding: 10px; background: #fff; border-radius: 8px; display: none;">
+    <h3>🧾 Ringkasan Pesanan</h3>
+    <button id="kirimWaBtn" style="margin-top: 10px; background-color: #25D366; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer;">
+      📲 Kirim ke WhatsApp
+    </button>
+    <div id="isiResume"></div>
+  </div>
   </div>
 
   <div class="main-content">
@@ -442,6 +452,31 @@
         statusMsg.style.color = "green";
         form.reset();
         menuContainer.innerHTML = "";
+
+        // 🔽 Buat resume HTML
+        let totalHarga = pesanan.reduce((sum, item) => sum + item.total, 0);
+        let html = `<p><strong>Nama:</strong> ${nama}</p><ul>`;
+        pesanan.forEach(item => {
+          html += `<li>${item.menu} (${item.qty}x) - Rp ${item.total.toLocaleString()}</li>`;
+        });
+        html += `</ul><p><strong>Total:</strong> Rp ${totalHarga.toLocaleString()}</p>`;
+
+        document.getElementById("isiResume").innerHTML = html;
+        document.getElementById("pesananResume").style.display = "block";
+
+        const waBtn = document.getElementById("kirimWaBtn");
+        waBtn.onclick = () => {
+          let pesan = `*Pesanan Kusara Chicken*\n\nNama: ${nama}\n\n`;
+          pesanan.forEach(item => {
+            pesan += `• ${item.menu} (${item.qty}x) - Rp ${item.total.toLocaleString()}\n`;
+          });
+          pesan += `\nTotal: Rp ${totalHarga.toLocaleString()}\n\nTerima kasih 🙏`;
+
+          // Encode ke URL dan buka WhatsApp
+          const encoded = encodeURIComponent(pesan);
+          window.open(`https://wa.me/081289934763?text=${encoded}`, "_blank");
+          };
+
       } catch (error) {
         statusMsg.textContent = "❌ Gagal mengirim pesanan: " + error.message;
         statusMsg.style.color = "red";
