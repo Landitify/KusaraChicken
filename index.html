@@ -28,10 +28,15 @@
       top: 0;
       height: 100vh;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
     }
 
     .sidebar h2 {
       margin-top: 0;
+      color: #333;
+      font-size: 24px;
+      text-align: center;
     }
 
     form {
@@ -76,20 +81,44 @@
       justify-content: center;
     }
 
+    .judul-menu {
+      width: 100%;
+      text-align: center;
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
     .produk {
       background: white;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       padding: 15px;
       width: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+    .produk-info {
+      margin-top: auto;
       text-align: center;
-      
     }
 
     .produk img {
       width: 100%;
       border-radius: 10px;
       margin-bottom: 10px;
+    }
+    .logo {
+      width: 250px;
+      height: auto;
+      margin-bottom: 5px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0px;
+      margin-bottom: 20px;
     }
 
     @media(max-width: 768px) {
@@ -152,8 +181,13 @@
 </head>
 <body>
 
+
+
   <div class="sidebar">
-    <h2>Form Pesanan Ayam</h2>
+    <div>
+      <img src="kusarachicken.png" alt="Kusara Chicken Logo" class="logo">
+    </div>
+    <h2>Masukan Pesanan Anda Disini🍗</h2>
     <form id="orderForm">
       <input type="text" id="nama" placeholder="Nama Lengkap" required />
       <div id="menuContainer"></div>
@@ -164,86 +198,119 @@
   </div>
 
   <div class="main-content">
+    <h2 class="judul-menu">Daftar Menu🍗</h2>
     <!-- Contoh produk -->
     <div class="produk">
       <img src="WING DRUMMET.jpg" alt="Wing Drummete (marinasi)">
+      <div class="produk-info">
       <h4>Wing Drummete (marinasi)</h4>
       <p>Rp 30.000</p>
+      </div>
     </div>
     <div class="produk">
       <img src="PARTING PREMIUM.jpg" alt="Parting Premium (marinasi)">
+      <div class="produk-info">
       <h4>Parting Premium (marinasi)</h4>
       <p>Rp 29.000</p>
+      </div>
     </div>
     <div class="produk">
       <img src="PAHA ATAS.jpg" alt="Paha Atas">
+      <div class="produk-info">
       <h4>Paha Atas</h4>
       <p>Rp 43.000</p>
+      </div>
     </div>
     <div class="produk">
       <img src="PAHA BAWAH.jpg" alt="Paha Bawah">
+      <div class="produk-info">
       <h4>Paha Bawah</h4>
       <p>Rp 43.000</p>
+      </div>
     </div>
     <div class="produk">
       <img src="PAHA UTUH.jpg" alt="Paha Utuh">
+      <div class="produk-info">
       <h4>Paha Utuh</h4>
       <p>Rp 43.000</p>
+      </div>
     </div>
     <div class="produk">  
       <img src="TANPA TULANG KULIT.jpg" alt="Paha (Tanpa Tulang & Tanpa Kulit)">
+      <div class="produk-info">
       <h4>Paha (Tanpa Tulang & Tanpa Kulit)</h4>
       <p>Rp 51.000</p>
+      </div>
     </div>
     <div class="produk">  
       <img src="DAGING KULIT TANPA TULANG.jpg" alt="Paha + Kulit (Tanpa Tulang)">
+      <div class="produk-info">
       <h4>Paha + Kulit (Tanpa Tulang)</h4>
       <p>Rp 50.000</p>
+      </div>
     </div>
     <div class="produk">    
       <img src="TANPA TULANG KULIT.jpg" alt="Dada (Tanpa Tulang & Tanpa Kulit)">
+      <div class="produk-info">
       <h4>Dada (Tanpa Tulang & Tanpa Kulit)</h4>
       <p>Rp 49.000</p>
+      </div>
     </div>
     <div class="produk">  
       <img src="DAGING KULIT TANPA TULANG.jpg" alt="Dada + Kulit (Tanpa Tulang)">
+      <div class="produk-info">
       <h4>Dada + Kulit (Tanpa Tulang)</h4>
       <p>Rp 48.000</p>
+      </div>
     </div>
     <div class="produk">  
       <img src="TANPA TULANG KULIT.jpg" alt="Fillet (campuran)">
+      <div class="produk-info">
       <h4>Fillet (campuran)</h4>
       <p>Rp 47.000</p>
+      </div>
     </div>
     <div class="produk">  
       <img src="SAYAP UTUH.jpg" alt="Sayap Utuh">
+      <div class="produk-info">
       <h4>Sayap Utuh</h4>
       <p>Rp 35.000</p>
+      </div>
     </div>
     <div class="produk">  
       <img src="WINGSTCIK.jpg" alt="Wingstick">
+      <div class="produk-info">
       <h4>Wingstick</h4>
       <p>Rp 37.000</p>
+      </div>
     </div>
     <div class="produk">  
       <img src="MIDLEWING.jpg" alt="Middle Wing">
+      <div class="produk-info">
       <h4>Middle Wing</h4>
       <p>Rp 37.000</p>
+      </div>
     </div>
     <div class="produk">  
       <img src="TRIMMING.jpg" alt="Trimming Paha (potongan mie ayam)">
+      <div class="produk-info">
       <h4>Trimming Paha (potongan mie ayam)</h4>
       <p>Rp 47.000</p>
+      </div>
     </div>
     <div class="produk">  
       <img src="TRIMMING.jpg" alt="Trimming Dada (ptongan mie ayam)">
+      <div class="produk-info">
       <h4>Trimming Dada (ptongan mie ayam)</h4>
       <p>Rp 47.000</p>
+      </div>
     </div>
     <div class="produk">  
       <img src="KULIT.jpg" alt="Kulit">
+      <div class="produk-info">
       <h4>Kulit</h4>
       <p>Rp 36.000</p>
+      </div>
     </div>
     <!-- Tambah lagi produk di sini -->
   </div>
