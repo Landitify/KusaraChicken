@@ -276,6 +276,12 @@
       flex: 1 1 60%;
       min-width: 120px;
     }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
   </style>
 </head>
 <body>
@@ -483,6 +489,10 @@
       <!-- Toast -->
       <div id="toast" style="position:fixed; bottom:30px; right:30px; background:#4caf50; color:white; padding:12px 20px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.2); display:none; z-index:9999; font-weight:bold;"></div>
       </div>
+      <div id="loadingSpinner" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.7); z-index:99999; justify-content:center; align-items:center;">
+        <div style="border: 6px solid #f3f3f3; border-top: 6px solid #f57c00; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite;"></div>
+      </div>
+
       </div>
     </div>
     <script>
@@ -613,6 +623,7 @@ document.addEventListener("click", function(event) {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    document.getElementById("loadingSpinner").style.display = "flex";
     const nama = document.getElementById("nama").value.trim();
     const pesanan = [];
     let isValid = true;
@@ -638,6 +649,8 @@ document.addEventListener("click", function(event) {
         waktu: new Date().toISOString()
       });
 
+      document.getElementById("loadingSpinner").style.display = "none"; // SEMBUNYIKAN spinner
+      
       statusMsg.textContent = "✅ Pesanan berhasil dikirim!";
       statusMsg.style.color = "green";
       form.reset();
@@ -665,6 +678,7 @@ document.addEventListener("click", function(event) {
       };
 
     } catch (error) {
+      document.getElementById("loadingSpinner").style.display = "none"; // SEMBUNYIKAN spinner
       statusMsg.textContent = "❌ Gagal mengirim pesanan: " + error.message;
       statusMsg.style.color = "red";
     }
