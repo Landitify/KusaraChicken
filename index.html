@@ -486,9 +486,25 @@
   const toggleSidebarBtn = document.getElementById("toggleSidebar");
   const closeSidebarBtn = document.getElementById("closeSidebar");
 
-  toggleSidebarBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("active");
-  });
+  toggleSidebarBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // ❗️ini penting banget, biar gak ikut trigger event klik luar
+  sidebar.classList.toggle("active");
+});
+
+
+  // Tutup sidebar jika klik di luar sidebar (khusus mobile)
+document.addEventListener("click", function(event) {
+  const sidebar = document.querySelector(".sidebar");
+  const toggleBtn = document.getElementById("toggleSidebar");
+
+  const isClickInsideSidebar = sidebar.contains(event.target);
+  const isClickOnToggle = toggleBtn.contains(event.target);
+
+  if (!isClickInsideSidebar && !isClickOnToggle && sidebar.classList.contains("active")) {
+    sidebar.classList.remove("active");
+  }
+});
+
 
 </script>
     <!-- Tambah lagi produk di sini -->
@@ -625,9 +641,9 @@
       let totalHarga = pesanan.reduce((sum, item) => sum + item.total, 0);
       let html = `<p><strong>Nama:</strong> ${nama}</p><ul>`;
       pesanan.forEach(item => {
-        html += `<li>${item.menu} (${item.qty}x) - Rp ${item.total.toLocaleString()}</li>`;
+        html += `<li>${item.menu} (${item.qty}x) - Rp ${Number(item.total).toLocaleString('id-ID')}</li>`;
       });
-      html += `</ul><p><strong>Total:</strong> Rp ${totalHarga.toLocaleString()}</p>`;
+      html += `</ul><p><strong>Total:</strong> Rp ${Number(totalHarga).toLocaleString('id-ID')}</p>`;
 
       document.getElementById("isiResume").innerHTML = html;
       document.getElementById("pesananResume").style.display = "block";
@@ -636,9 +652,9 @@
       waBtn.onclick = () => {
         let pesan = `*Pesanan Kusara Chicken*\n\nNama: ${nama}\n\n`;
         pesanan.forEach(item => {
-          pesan += `• ${item.menu} (${item.qty}x) - Rp ${item.total.toLocaleString()}\n`;
-        });
-        pesan += `\nTotal: Rp ${totalHarga.toLocaleString()}\n\nTerima kasih 🙏`;
+          pesan += `• ${item.menu} (${item.qty}x) - Rp ${Number(item.total).toLocaleString('id-ID')}\n`;
+          });
+          pesan += `\nTotal: Rp ${Number(totalHarga).toLocaleString('id-ID')}\n\nTerima kasih 🙏`;
         const encoded = encodeURIComponent(pesan);
         window.open(`https://wa.me/+6281289934763?text=${encoded}`, "_blank");
       };
