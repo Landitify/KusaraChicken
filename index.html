@@ -177,7 +177,8 @@
       padding: 10px 15px;
       border-radius: 6px;
       cursor: pointer;
-      display: none; /* default disembunyikan */
+      display: none;
+      font-weight: bold;
     }
 
     .close-sidebar {
@@ -189,6 +190,19 @@
       border-radius: 6px;
       margin-bottom: 10px;
       cursor: pointer;
+    }
+
+    .badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: red;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 50%;
+      display: none;
     }
 
     /* Tampilan mobile */
@@ -287,7 +301,8 @@
 <body>
 <!-- Tombol toggle hanya untuk mobile -->
 <button id="toggleSidebar" class="toggle-sidebar">
-  ☰ Order 🛒
+  🛒 Order
+  <span id="itemCount" class="badge">0</span>
 </button>
 
 <!-- Sidebar -->
@@ -322,7 +337,7 @@
       <h4>Wing Drummete (marinasi)</h4>
       <p class="hargaproduk">Rp 30.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Wing Drummete (marinasi)">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Wing Drummete (marinasi)">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -332,7 +347,7 @@
       <h4>Parting Premium (marinasi)</h4>
       <p class="hargaproduk">Rp 29.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Parting Premium (marinasi)">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Parting Premium (marinasi)">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -342,7 +357,7 @@
       <h4>Paha Atas</h4>
       <p class="hargaproduk">Rp 43.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Paha Atas">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Paha Atas">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -352,7 +367,7 @@
       <h4>Paha Bawah</h4>
       <p class="hargaproduk">Rp 43.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Paha Bawah">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Paha Bawah">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -362,7 +377,7 @@
       <h4>Paha Utuh</h4>
       <p class="hargaproduk">Rp 43.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Paha Utuh">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Paha Utuh">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -372,7 +387,7 @@
       <h4>Paha (Tanpa Tulang & Tanpa Kulit)</h4>
       <p class="hargaproduk">Rp 51.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Paha (Tanpa Tulang & Tanpa Kulit)">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Paha (Tanpa Tulang & Tanpa Kulit)">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -382,7 +397,7 @@
       <h4>Paha + Kulit (Tanpa Tulang)</h4>
       <p class="hargaproduk">Rp 50.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Paha + Kulit (Tanpa Tulang)">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Paha + Kulit (Tanpa Tulang)">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -392,7 +407,7 @@
       <h4>Dada (Tanpa Tulang & Tanpa Kulit)</h4>
       <p class="hargaproduk">Rp 49.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Dada (Tanpa Tulang & Tanpa Kulit)">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Dada (Tanpa Tulang & Tanpa Kulit)">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -402,7 +417,7 @@
       <h4>Dada + Kulit (Tanpa Tulang)</h4>
       <p class="hargaproduk">Rp 48.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Dada + Kulit (Tanpa Tulang)">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Dada + Kulit (Tanpa Tulang)">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -412,7 +427,7 @@
       <h4>Fillet (campuran)</h4>
       <p class="hargaproduk">Rp 47.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Fillet (campuran)">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Fillet (campuran)">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -422,7 +437,7 @@
       <h4>Sayap Utuh</h4>
       <p class="hargaproduk">Rp 35.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Sayap Utuh">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Sayap Utuh">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -432,7 +447,7 @@
       <h4>Wingstick</h4>
       <p class="hargaproduk">Rp 37.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Wingstick">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Wingstick">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -442,7 +457,7 @@
       <h4>Middle Wing</h4>
       <p class="hargaproduk">Rp 37.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Middle Wing">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Middle Wing">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -452,7 +467,7 @@
       <h4>Trimming Paha (potongan mie ayam)</h4>
       <p class="hargaproduk">Rp 47.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Trimming Paha (potongan mie ayam)">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Trimming Paha (potongan mie ayam)">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -462,7 +477,7 @@
       <h4>Trimming Dada (ptongan mie ayam)</h4>
       <p class="hargaproduk">Rp 47.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Trimming Dada (ptongan mie ayam)">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Trimming Dada (ptongan mie ayam)">+ Keranjang</button>
       </div>
       </div>
     </div>
@@ -472,7 +487,7 @@
       <h4>Kulit</h4>
       <p class="hargaproduk">Rp 36.000</p>
       <div class="produk-actions">
-      <button class="produk-btn" data-nama="Kulit">Tambahkan 🧺</button>
+      <button class="produk-btn" data-nama="Kulit">+ Keranjang</button>
 
       <!-- Modal Input Jumlah -->
       <div id="qtyModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
@@ -519,6 +534,26 @@ document.addEventListener("click", function(event) {
     sidebar.classList.remove("active");
   }
 });
+
+function updateItemCount() {
+  const rows = document.querySelectorAll(".menu-row");
+  let totalQty = 0;
+  rows.forEach(row => {
+    const qty = parseInt(row.querySelector("input[type='number']").value);
+    if (!isNaN(qty)) totalQty += qty;
+  });
+
+  console.log("Total qty:", totalQty); // ✅ Debug log
+
+  const itemCount = document.getElementById("itemCount");
+  if (totalQty > 0) {
+    itemCount.textContent = totalQty;
+    itemCount.style.display = "inline-block";
+  } else {
+    itemCount.style.display = "none";
+  }
+}
+
 
 
 </script>
@@ -599,7 +634,10 @@ document.addEventListener("click", function(event) {
     removeBtn.type = "button";
     removeBtn.textContent = "Hapus";
     removeBtn.className = "remove-btn";
-    removeBtn.onclick = () => row.remove();
+    removeBtn.onclick = () => {
+    row.remove();
+    updateItemCount(); // ✅ TAMBAH INI
+  };
 
     rowBottom.append(total, removeBtn);
 
@@ -610,8 +648,10 @@ document.addEventListener("click", function(event) {
     }
 
     select.addEventListener("change", updateTotal);
-    qty.addEventListener("input", updateTotal);
-
+    qty.addEventListener("input", () => {
+    updateTotal();
+    updateItemCount(); // ✅ TAMBAH INI
+    });
     row.append(rowTop, rowBottom);
     return row;
   }
@@ -715,6 +755,7 @@ document.addEventListener("click", function(event) {
     totalField.value = `Rp ${hargaMenu[namaMenu] * jumlah}`;
 
     menuContainer.appendChild(row);
+    updateItemCount(); // ✅ TAMBAH INI
     modal.style.display = "none";
     showToast("✅ Pesanan berhasil dimasukkan!");
   };
