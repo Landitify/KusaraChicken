@@ -337,6 +337,7 @@
   <div class="main-content">
     <img src="kusarachicken.png" alt="Kusara Chicken Logo" class="logo">
     <h2 class="judul-menu">Daftar Menu🍗</h2>
+    <div id="produkList"></div>
     <!-- Contoh produk -->
     <div class="produk">
       <img src="WING DRUMMET.jpg" alt="Wing Drummete (marinasi)">
@@ -571,6 +572,7 @@ function updateItemCount() {
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+    import { get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAjuzb9SHhgU5ahs_Zx4YUOQus7bJyg-tA",
@@ -585,25 +587,35 @@ function updateItemCount() {
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+    const hargaRef = ref(db, 'HargaProduk'); // sesuai dengan admin.html
 
-    const hargaMenu = {
-      "Wing Drummete (marinasi)": 30000,
-      "Parting Premium (marinasi)": 29000,
-      "Paha Atas": 43000,
-      "Paha Bawah": 43000,
-      "Paha Utuh": 43000,
-      "Paha (Tanpa Tulang & Tanpa Kulit)": 51000,
-      "Paha + Kulit (Tanpa Tulang)": 50000,
-      "Dada (Tanpa Tulang & Tanpa Kulit)": 49000,
-      "Dada + Kulit (Tanpa Tulang)": 48000,
-      "Fillet (campuran)": 47000,
-      "Sayap Utuh": 35000,
-      "Wingstick": 37000,
-      "Middle Wing": 37000,
-      "Trimming Paha (potongan mie ayam)": 47000,
-      "Trimming Dada (ptongan mie ayam)": 47000,
-      "Kulit": 36000
-    };
+    get(hargaRef).then(snapshot => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+
+        // Isi hargaMenu dengan data dari Firebase
+        for (const key in data) {
+          hargaMenu[key] = data[key];
+        }
+
+        // Update tampilan harga di kartu produk
+        document.querySelectorAll('.produk').forEach(produk => {
+          const nama = produk.querySelector('button')?.dataset?.nama;
+          const hargaEl = produk.querySelector('.hargaproduk');
+          if (nama && hargaMenu[nama]) {
+            hargaEl.textContent = `Rp ${Number(hargaMenu[nama]).toLocaleString('id-ID')}`;
+          }
+        });
+
+      } else {
+        console.warn("Harga tidak ditemukan di Firebase");
+      }
+    }).catch(error => {
+      console.error("Gagal mengambil harga:", error);
+    });
+
+
+    const hargaMenu = {}
 
     const form = document.getElementById("orderForm");
     const menuContainer = document.getElementById("menuContainer");
