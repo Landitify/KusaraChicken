@@ -320,8 +320,16 @@
   <!-- Tombol tutup sidebar di mobile -->
     <form id="orderForm">
       <input type="text" id="nama" placeholder="Nama Lengkap" required />
+      <input type="tel" id="wa" placeholder="Nomor WhatsApp (cth: 09123456789)" required />
       <div id="menuContainer"></div>
       <button type="button" id="addMenu">+ Tambah Menu</button>
+      
+      <select id="pembayaran" required>
+        <option value="">-- Pilih Metode Pembayaran --</option>
+        <option value="COD">Bayar di Tempat (COD)</option>
+        <option value="Transfer">Transfer Bank</option>
+      </select>
+
       <button type="submit" style="background-color:#57a300;">Buat Pesanan</button>
     </form>
     <p id="statusMsg"></p>
@@ -685,6 +693,8 @@ function updateItemCount() {
     e.preventDefault();
     document.getElementById("loadingSpinner").style.display = "flex";
     const nama = document.getElementById("nama").value.trim();
+    const wa = document.getElementById("wa").value.trim();
+    const pembayaran = document.getElementById("pembayaran").value;
     const pesanan = [];
     let isValid = true;
 
@@ -695,16 +705,20 @@ function updateItemCount() {
       else pesanan.push({ menu, qty, total: hargaMenu[menu] * qty });
     });
 
-    if (!nama || !isValid || pesanan.length === 0) {
-      statusMsg.textContent = "❌ Harap isi semua field!";
-      statusMsg.style.color = "red";
-      return;
-    }
+      if (!nama || !wa || !pembayaran || !isValid || pesanan.length === 0) {
+        document.getElementById("loadingSpinner").style.display = "none"; // 🛑 HENTIKAN LOADING
+        statusMsg.textContent = "❌ Harap isi semua field!";
+        statusMsg.style.color = "red";
+        return;
+      }
+
 
     try {
       const newOrderRef = push(ref(db, 'pesanan'));
       await set(newOrderRef, {
         nama,
+        wa,
+        pembayaran,
         pesanan,
         waktu: new Date().toISOString()
       });
@@ -717,22 +731,40 @@ function updateItemCount() {
       menuContainer.innerHTML = "";
 
       let totalHarga = pesanan.reduce((sum, item) => sum + item.total, 0);
-      let html = `<p><strong>Nama:</strong> ${nama}</p><ul>`;
+        let html = `<p><strong>Nama:</strong> ${nama}</p>
+        <p><strong>WA:</strong> ${wa}</p>
+        <p><strong>Pembayaran:</strong> ${pembayaran}</p>
+        <ul>`;
+
       pesanan.forEach(item => {
         html += `<li>${item.menu} (${item.qty}x) - Rp ${Number(item.total).toLocaleString('id-ID')}</li>`;
       });
       html += `</ul><p><strong>Total:</strong> Rp ${Number(totalHarga).toLocaleString('id-ID')}</p>`;
+
+      if (pembayaran === "Transfer") {
+        html += `<p><strong>Silakan transfer ke rekening:</strong><br>
+        BNI 1181956153 a.n. Muhamad Ahya Kusara</p>`;
+      }
+
+      html += `</div>`;
 
       document.getElementById("isiResume").innerHTML = html;
       document.getElementById("pesananResume").style.display = "block";
 
       const waBtn = document.getElementById("kirimWaBtn");
       waBtn.onclick = () => {
-        let pesan = `*Pesanan Kusara Chicken*\n\nNama: ${nama}\n\n`;
+        let pesan = `*Pesanan Kusara Chicken*\n\nNama: ${nama}\nNo. WA: ${wa}\nPembayaran: ${pembayaran}\n\n`;
+        pesan += `*Daftar Pesanan:*\n`;
         pesanan.forEach(item => {
           pesan += `• ${item.menu} (${item.qty}x) - Rp ${Number(item.total).toLocaleString('id-ID')}\n`;
           });
-          pesan += `\nTotal: Rp ${Number(totalHarga).toLocaleString('id-ID')}\n\nTerima kasih 🙏`;
+          pesan += `\nTotal: Rp ${Number(totalHarga).toLocaleString('id-ID')}`;
+
+          if (pembayaran === "Transfer") {
+          pesan += `\n\nSilakan transfer ke rekening:\nBCA 1234567890 a.n. M. Kusara\n*Jangan lupa kirim bukti transfer ke WA ya 🙏*`;
+          } else
+
+        pesan += `\n\nTerima kasih 🙏`;
         const encoded = encodeURIComponent(pesan);
         window.open(`https://wa.me/+6281289934763?text=${encoded}`, "_blank");
       };
