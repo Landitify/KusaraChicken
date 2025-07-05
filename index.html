@@ -741,10 +741,10 @@ function updateItemCount() {
       });
       html += `</ul><p><strong>Total:</strong> Rp ${Number(totalHarga).toLocaleString('id-ID')}</p>`;
 
-      if (pembayaran === "Transfer") {
-        html += `<p><strong>Silakan transfer ke rekening:</strong><br>
-        BNI 1181956153 a.n. Muhamad Ahya Kusara</p>`;
-      }
+      // if (pembayaran === "Transfer") {
+      //   html += `<p><strong>Silakan transfer ke rekening:</strong><br>
+      //   BNI 1181956153 a.n. Muhamad Ahya Kusara</p>`;
+      // }
 
       html += `</div>`;
 
@@ -760,11 +760,11 @@ function updateItemCount() {
           });
           pesan += `\nTotal: Rp ${Number(totalHarga).toLocaleString('id-ID')}`;
 
-          if (pembayaran === "Transfer") {
-          pesan += `\n\nSilakan transfer ke rekening:\nBCA 1234567890 a.n. M. Kusara\n*Jangan lupa kirim bukti transfer ke WA ya 🙏*`;
-          } else
+        //   if (pembayaran === "Transfer") {
+        //   pesan += `\n\nSilakan transfer ke rekening:\nBNI 1181956153 a.n. Muhamad Ahya Kusara\n*Jangan lupa kirim bukti transfer ke WA ya 🙏*`;
+        //   } else
 
-        pesan += `\n\nTerima kasih 🙏`;
+        // pesan += `\n\nTerima kasih 🙏`;
         const encoded = encodeURIComponent(pesan);
         window.open(`https://wa.me/+6281289934763?text=${encoded}`, "_blank");
       };
