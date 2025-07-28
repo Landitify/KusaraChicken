@@ -724,6 +724,14 @@ function updateItemCount() {
     const pembayaran = document.getElementById("pembayaran").value;
     const pesanan = [];
     let isValid = true;
+// Validasi nomor WhatsApp (harus diawali 08 atau +628)
+    const waPattern = /^(08|\+628)[0-9]{7,12}$/;
+  if (!waPattern.test(wa)) {
+    document.getElementById("loadingSpinner").style.display = "none";
+    statusMsg.textContent = "❌ Nomor WhatsApp harus diawali dengan 08 atau +628 dan panjang valid!";
+    statusMsg.style.color = "red";
+    return;
+  }
 
     menuContainer.querySelectorAll(".menu-row").forEach(row => {
       const menu = row.querySelector("select").value;
